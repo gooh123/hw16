@@ -18,7 +18,7 @@ class User(db.Model):
     last_name = db.Column(db.String(255), nullable=False)
     age = db.Column(db.Integer)
     email = db.Column(db.String(255), unique=True)
-    role_id = db.Column(db.Integer, db.ForeignKey('user_roles.id'))
+    role_id = db.Column(db.Integer)
     phone = db.Column(db.String(16), unique=True)
 
     role = relationship('UserRole')
@@ -28,8 +28,8 @@ class Offer(db.Model):
     __tablename__ = 'offers'
 
     id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
-    executor_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    order_id = db.Column(db.Integer)
+    executor_id = db.Column(db.Integer)
 
     executor = relationship('User')
     order = relationship('Order')
@@ -45,8 +45,8 @@ class Order(db.Model):
     end_date = db.Column(db.Date)
     address = db.Column(db.String)
     price = db.Column(db.Integer)
-    customer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    executor_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    customer_id = db.Column(db.Integer)
+    executor_id = db.Column(db.Integer)
 
     customer = relationship('User')
     executor = relationship('User')
